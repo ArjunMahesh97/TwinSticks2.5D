@@ -7,9 +7,11 @@ public class GameManager : MonoBehaviour {
 
 	public bool recording = true;
 
+	private float fixedDeltaTime;
+
 	// Use this for initialization
 	void Start () {
-		
+		fixedDeltaTime = Time.fixedDeltaTime;	
 	}
 	
 	// Update is called once per frame
@@ -19,5 +21,23 @@ public class GameManager : MonoBehaviour {
 		} else {
 			recording = true;
 		}
+
+		if (Input.GetKeyDown (KeyCode.P)) {
+			PauseGame ();
+		}
+
+		if (Input.GetKeyDown (KeyCode.R)) {
+			ResumeGame ();
+		}
+	}
+
+	void PauseGame(){
+		Time.timeScale = 0f;
+		Time.fixedDeltaTime = 0f;
+	}
+
+	void ResumeGame(){
+		Time.timeScale = 1f;
+		Time.fixedDeltaTime = fixedDeltaTime;
 	}
 }
